@@ -1,3 +1,6 @@
+//
+// Created by Gustavo Diaz on 11/17/25.
+//
 #include <iostream>
 #include <string>
 #include <limits> // Used for input validation
@@ -15,7 +18,21 @@ using namespace std;
  * @return A valid, non-negative integer.
  */
 int getNonNegativeIntInput(string prompt) {
+    int value;
 
+    while (true) {
+        cout << prompt;
+        cin >> value;
+
+        if (cin.fail() || value < 0) {
+            cout << "Invalid input. Please enter a NON-negative integer." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+        } else {
+            cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+            return value;
+        }
+    }
 }
 
 /**
@@ -28,7 +45,21 @@ int getNonNegativeIntInput(string prompt) {
  * @return A valid, positive integer.
  */
 int getPositiveIntInput(string prompt) {
+    int value;
 
+    while (true) {
+        cout << prompt;
+        cin >> value;
+
+        if (cin.fail() || value < 1) {
+            cout << "Invalid input. Please enter a POSITIVE integer (>= 1)." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+        } else {
+            cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+            return value;
+        }
+    }
 }
 
 
@@ -75,7 +106,7 @@ int main() {
             case 4: // Tower of Hanoi
                 n = getPositiveIntInput("Enter the number of discs for Tower of Hanoi (e.g., 3): ");
                 if (n > 10) {
-                     cout << "This will produce a very large number of steps!" << endl;
+                    cout << "This will produce a very large number of steps!" << endl;
                 }
                 cout << "Solving Tower of Hanoi for " << n << " discs:" << endl;
                 towerOfHanoi(n, 'A', 'B', 'C');
